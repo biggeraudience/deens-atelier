@@ -1,10 +1,10 @@
-import coralVillaImg1 from '../assets/images/coral_villa_1.webp'; // Placeholder
-import coralVillaImg2 from '../assets/images/coral_villa_2.webp'; // Placeholder
-import coralVillaImg3 from '../assets/images/coral_villa_3.webp'; // Placeholder
+import coralVillaImg1 from '../assets/images/coral_villa_1.webp'; 
+import coralVillaImg2 from '../assets/images/coral_villa_2.webp'; 
+import coralVillaImg3 from '../assets/images/coral_villa_3.webp'; 
 
-import alSawamImg1 from '../assets/images/al_sawam_1.webp'; // Placeholder
-import alSawamImg2 from '../assets/images/al_sawam_2.webp'; // Placeholder
-import alSawamImg3 from '../assets/images/al_sawam_3.webp'; // Placeholder
+import alSawamImg1 from '../assets/images/al_sawam_1.webp'; 
+import alSawamImg2 from '../assets/images/al_sawam_2.webp'; 
+import alSawamImg3 from '../assets/images/al_sawam_3.webp'; 
 
 export const projectsData = [
   {
@@ -39,5 +39,4 @@ export const projectsData = [
     body3: 'Our process involved extensive cultural research, collaborative design workshops, and rigorous project management. The completed Al Sawam Mosque stands as a testament to harmonious design, fostering spiritual connection and cultural pride within the vibrant Jakarta community. It has become a landmark of modern devotion.',
     imageUrl3: alSawamImg3,
   },
-  // Add The Ascend Tower, Abuja and Harmony Heights Residential Estate, Lagos here following the same structure
 ];

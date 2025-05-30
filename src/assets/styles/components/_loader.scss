@@ -6,7 +6,7 @@
   height: 100vh;
   background-color: -dark;
   z-index: -index-loader;
-  @include flex-center; // Using flex-center mixin
+  @include flex-center; 
 
   &__boxes {
     display: flex;

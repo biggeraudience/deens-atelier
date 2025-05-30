@@ -4,9 +4,9 @@ module.exports = {
     'stylelint-prettier/recommended'
   ],
   rules: {
-    'selector-class-pattern': null, // Disable class pattern check for BEM or custom naming
-    'scss/dollar-variable-pattern': null, // Disable variable pattern check
-    'no-descending-specificity': null, // Often relaxed for SCSS structure
+    'selector-class-pattern': null,
+    'scss/dollar-variable-pattern': null,
+    'no-descending-specificity': null,
     'block-no-empty': null,
     'at-rule-no-unknown': null,
     'scss/at-rule-no-unknown': [true, {

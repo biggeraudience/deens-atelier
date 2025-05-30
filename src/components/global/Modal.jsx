@@ -7,7 +7,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     if (modalRef.current) {
       if (isOpen) {
         modalRef.current.classList.add('image-modal--open');
-        document.body.style.overflow = 'hidden'; // Prevent scrolling background
+        document.body.style.overflow = 'hidden';
       } else {
         modalRef.current.classList.remove('image-modal--open');
         document.body.style.overflow = '';
@@ -26,7 +26,7 @@ const Modal = ({ isOpen, onClose, children }) => {
       className="image-modal"
       ref={modalRef}
       onClick={handleOverlayClick}
-      style={{ zIndex: isOpen ? 'var(--z-index-modal)' : '-1' }} // Use var for Z-index
+      style={{ zIndex: isOpen ? 'var(--z-index-modal)' : '-1' }} 
     >
       <div className="image-modal__content">
         {children}

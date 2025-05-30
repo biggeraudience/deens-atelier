@@ -2,11 +2,10 @@
   position: fixed;
   top: 0;
   left: 0;
-  pointer-events: none; // Essential to allow clicks through it
-  z-index: -index-tooltip; // Above everything else
-  // Styling for your custom pointer (e.g., small circle, icon)
-  // Initially hidden or styled to match default cursor
-  transform: translate(-50%, -50%); // Center it on mouse position
+  pointer-events: none; 
+  z-index: -index-tooltip; 
+
+  transform: translate(-50%, -50%); 
   transition: transform -speed-fast ease-out, opacity -speed-fast ease-out;
 
   &__dot {
@@ -16,5 +15,5 @@
     border-radius: 50%;
     opacity: 0.8;
   }
-  // Add styling for hover states etc.
+ 
 }

@@ -1,17 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for type checking
+import PropTypes from 'prop-types'; 
 
-// Placeholder images for logos and SVGs.
-// In a real project, you would import these from your assets folder:
-// import companyLogo from '../../assets/images/company-logo.png';
-// import secondaryLogo from '../../assets/images/secondary-logo.png';
+
 
 const NavDesktop = ({ currentPageNumber }) => {
   return (
     <nav className="main-nav main-nav--desktop">
       {/* Section 1: Company Logo */}
       <div className="main-nav__section main-nav__section--logo">
-        {/* Replace with your actual company logo PNG */}
+      
         <img src="https://placehold.co/100x50/000000/FFFFFF?text=DEENS" alt="Deen's Atelier Logo" className="main-nav__logo" />
       </div>
 
@@ -29,7 +26,7 @@ const NavDesktop = ({ currentPageNumber }) => {
       {/* Section 3: Empty Section */}
       <div className="main-nav__section main-nav__section--empty"></div>
 
-      {/* Section 4: Another Logo */}
+      {/* Section 4: arcon Logo */}
       <div className="main-nav__section main-nav__section--secondary-logo">
         {/* Replace with your actual secondary logo PNG */}
         <img src="https://placehold.co/80x40/000000/FFFFFF?text=ATELIER" alt="Atelier Icon" className="main-nav__secondary-logo" />

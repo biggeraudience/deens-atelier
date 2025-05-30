@@ -4,48 +4,48 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden; // Important for image transformations
+  overflow: hidden; 
 
   .project-image {
     width: 100%;
-    height: 30rem; // Adjust as needed for mobile aspect ratio
+    height: 30rem; 
     object-fit: cover;
-    transition: transform $speed-normal $in-out; // Corrected: Using $
+    transition: transform $speed-normal $in-out; 
   }
 
   .project-content {
-    padding: $md-spacing; // Corrected: Using $ and spacing variable
-    background-color: rgba($dark, 0.8); // <-- CORRECTED: Using $dark
-    color: $text-light; // Corrected: Using $
+    padding: $md-spacing; 
+    background-color: rgba($dark, 0.8); 
+    color: $text-light; 
     position: absolute;
     bottom: 0;
     left: 0;
     right: 0;
     transform: translateY(0%);
-    transition: transform $speed-normal $in-out; // Corrected: Using $
+    transition: transform $speed-normal $in-out; 
 
     &__phase-1 {
-      // Styles for the initial overview text
+    
     }
     &__phase-2 {
-      // Styles for specs/blueprints text
+      
     }
     &__phase-3 {
-      // Styles for process/completed text
+      
     }
   }
 
-  // Hover effect for project block (example)
+  
   &:hover {
     .project-image {
       transform: scale(1.05);
     }
   }
 
-  @include media-breakpoint-up($md) { // Corrected: Using $md for breakpoint
-    flex-direction: row; // Adjust for side-by-side on desktop
+  @include media-breakpoint-up($md) { 
+    flex-direction: row; 
     .project-image {
-      height: 40rem; // Adjust for desktop
+      height: 40rem; 
     }
   }
 }

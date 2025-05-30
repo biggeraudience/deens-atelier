@@ -5,4 +5,4 @@ export const registerGSAPPlugins = () => {
   gsap.registerPlugin(ScrollTrigger);
 };
 
-// You can add other global animation utility functions here
+

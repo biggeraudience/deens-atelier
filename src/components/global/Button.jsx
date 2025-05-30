@@ -1,6 +1,4 @@
 import React from 'react';
-// Assuming your main SCSS file imports _button.scss
-// import '../../assets/styles/main.scss'; // Or wherever your main SCSS is imported
 
 /**
  * Reusable Button Component for Deen's Atelier.

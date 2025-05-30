@@ -6,7 +6,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
     'plugin:jsx-a11y/recommended',
-    'plugin:prettier/recommended', // Ensures Prettier rules run as ESLint rules
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
@@ -17,7 +17,7 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    'react/prop-types': 'off', // Turn off prop-types checking (optional, good for quick setup)
-    'prettier/prettier': 'warn', // Show Prettier errors as warnings
+    'react/prop-types': 'off', 
+    'prettier/prettier': 'warn', 
   },
 };

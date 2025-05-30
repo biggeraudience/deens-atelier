@@ -10,26 +10,25 @@ const Nav = () => {
   useEffect(() => {
     if (navRef.current) {
       if (isOpen) {
-        // When opening: set display flex BEFORE animating, then add class and animate.
-        // This ensures the element is rendered and ready for animation.
-        gsap.set(navRef.current, { display: 'flex' }); // Make it display flex immediately
-        navRef.current.classList.add('is-open'); // Add class for CSS changes (like background color)
+        
+        gsap.set(navRef.current, { display: 'flex' }); 
+        navRef.current.classList.add('is-open'); 
         gsap.to(navRef.current, {
-          y: '0%', // Animate to visible position
-          opacity: 1, // Animate opacity
+          y: '0%',
+          opacity: 1, 
           duration: 0.5,
           ease: 'power3.out',
         });
       } else {
-        // When closing: animate first, then set display none on complete.
+       
         gsap.to(navRef.current, {
-          y: '100%', // Animate downwards to hide
-          opacity: 0, // Animate opacity
+          y: '100%', 
+          opacity: 0, 
           duration: 0.5,
           ease: 'power3.in',
           onComplete: () => {
-            navRef.current.classList.remove('is-open'); // Remove class after animation
-            gsap.set(navRef.current, { display: 'none' }); // Finally hide completely
+            navRef.current.classList.remove('is-open'); 
+            gsap.set(navRef.current, { display: 'none' }); 
           },
         });
       }
@@ -41,14 +40,14 @@ const Nav = () => {
   };
 
   const handleLinkClick = () => {
-    setIsOpen(false); // Close nav when a link is clicked
+    setIsOpen(false); 
   };
 
   return (
     <>
-      {/* Hamburger Icon (always present, CSS handles display based on breakpoint) */}
+      
       <button className="main-nav__toggle" onClick={toggleNav}>
-        {/* Placeholder SVG for Hamburger */}
+        {/* SVG for Hamburger */}
         <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect width="30" height="3" fill="white"/>
           <rect y="8" width="30" height="3" fill="white"/>
@@ -77,7 +76,7 @@ const Nav = () => {
 
           {/* Close Button for Mobile Nav */}
           <button className="main-nav__close" onClick={toggleNav}>
-            {/* Placeholder SVG for Close */}
+            {/* SVG for Close */}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
               <path d="M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -106,7 +105,7 @@ const Nav = () => {
           {/* Section 3: Empty Section */}
           <div className="nav__section nav__section--empty"></div>
 
-          {/* Section 4: Another Logo */}
+          {/* Section 4: arcon Logo */}
           <div className="nav__section nav__section--second-logo">
             <img src="https://placehold.co/80x40/000000/FFFFFF?text=ATELIER" alt="Atelier Icon" className="main-nav__secondary-logo" />
           </div>
@@ -123,7 +122,7 @@ const Nav = () => {
 };
 
 Nav.propTypes = {
-  // If you ever pass props to Nav, define them here.
+ 
 };
 
 export default Nav;

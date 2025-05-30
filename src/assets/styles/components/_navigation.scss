@@ -1,38 +1,34 @@
-// src/assets/styles/layout/_navigation.scss
 
 .main-nav {
-  // Base styles for the main nav container (mobile-first initial hidden state)
+
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; // Full screen for mobile overlay potential
-  background-color: $dark; // Default dark background for mobile overlay
+  height: 100vh; 
+  background-color: $dark; 
   z-index: $index-fixed-nav;
-  transition: background-color $speed-normal $out-expo; // Only background color transition here
+  transition: background-color $speed-normal $out-expo; 
 
-  // Initial hidden state for mobile (GSAP will manage `display: none` and `y: 100%`)
   transform: translateY(100%);
   opacity: 0;
-  display: none; // This will be overridden by GSAP when opening
+  display: none; 
 
-  // Hide desktop-specific content by default (mobile-first approach)
+ 
   .nav-desktop-content {
     display: none;
   }
 
-  // --- Mobile Navigation Content (Horizontal Layout, always nested correctly) ---
-  // This block applies to screens smaller than $md (typically desktop breakpoint)
-  // and will be progressively overridden by `max-width` media queries below.
+
   @media (max-width: ($md - 1px)) {
     .nav-mobile-content {
-      display: none; // Hidden by default, shown when .is-open
+      display: flex; 
       width: 100%;
-      height: 100%; // Takes full height of the horizontal bar (10rem when open)
-      padding: $xs; // Default padding for mobile content
-      flex-direction: row; // Logo, buttons, close all in a row
-      justify-content: space-between; // Distribute items horizontally
-      align-items: center; // Vertically align items in the row
+      height: 100%; 
+      padding: $xs; 
+      flex-direction: row; 
+      justify-content: space-between; 
+      align-items: center; 
 
       // --- Default mobile styles (apply to most mobile screens) ---
       .nav__section {
@@ -43,15 +39,15 @@
 
         &--logo {
           flex: 0 0 auto;
-          padding-right: $xs; // Space before the divider
+          padding-right: $xs; 
           position: relative;
 
           img {
-            height: 4rem; // Default logo height for larger mobile screens
+            height: 4rem; 
             width: auto;
           }
 
-          &::after { // Separator line
+          &::after { 
             content: '';
             position: absolute;
             right: 0;
@@ -64,45 +60,31 @@
         }
 
         &--buttons {
-          flex-grow: 1; // Takes up remaining space for buttons
+          flex-grow: 1; 
           display: flex;
-          flex-direction: row; // Buttons themselves are laid out horizontally
-          justify-content: space-around; // Distribute buttons evenly
-          align-items: center; // Vertically center buttons
-          gap: $xxs; // Default gap between buttons
-          position: relative; // For the grid background
-          overflow: hidden; // Hide grid overflow
+          flex-direction: row; 
+          justify-content: space-around; 
+          align-items: center; 
+          gap: $xxs; 
+          position: relative; 
+          overflow: hidden; 
 
-          padding-left: $xs; // Padding from divider
-          padding-right: $xs; // Padding from close button
+          padding-left: $xs; 
+          padding-right: $xs; 
 
-          &::before { // Grid background
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image:
-              linear-gradient(to right, rgba($text-dark, 0.1) 0.2px, transparent 0.2px),
-              linear-gradient(to bottom, rgba($text-dark, 0.1) 0.2px, transparent 0.2px);
-            background-size: $xs $xs;
-            z-index: -1;
-          }
-
-          .main-nav__links { // Styling for the ul
+          .main-nav__links { 
             display: flex;
             flex-direction: row;
             list-style: none;
             padding: 0;
             margin: 0;
-            gap: $xxs; // Space between list items within the ul
+            gap: $xxs; 
           }
 
           .btn {
-            font-size: 1rem; // **FURTHER REDUCED Default button font size for mobile**
-            padding: 0.5rem 0.8rem; // **FURTHER REDUCED Default button padding for mobile**
-            white-space: nowrap; // Prevent text wrapping
+            font-size: 1rem; 
+            padding: 0.5rem 0.8rem; 
+            white-space: nowrap; 
             background-color: transparent;
             color: $text-dark;
             border: 1px solid $text-dark;
@@ -118,14 +100,14 @@
         }
       }
 
-      // Close Button for Mobile Nav
+      
       .main-nav__close {
         position: static;
         background: none;
         border: none;
         cursor: pointer;
         svg {
-          width: 2.2rem; // Default close icon size
+          width: 2.2rem; 
           height: 2.2rem;
           path {
             stroke: $text-dark;
@@ -133,103 +115,103 @@
         }
       }
 
-      // --- Breakpoint: Medium Mobiles/Tablets (481px to 767px) ---
+      // --- Breakpoint: Medium Mobiles/Tablets ---
       @media (min-width: (#{$mobile-large + 1})) and (max-width: ($md - 1px)) {
         .nav__section {
           &--logo {
             img {
-              height: 5.5rem; // Bigger logo for medium screens
+              height: 5.5rem; 
             }
           }
           &--buttons {
             .btn {
-              font-size: 1.4rem;      // Larger button text for medium screens
-              padding: 1rem 1.4rem;   // More generous padding for medium screens
+              font-size: 1.4rem; 
+              padding: 1rem 1.4rem; 
             }
           }
         }
         .main-nav__close {
           svg {
-            width: 2.8rem;  // Bigger close icon for medium screens
+            width: 2.8rem; 
             height: 2.8rem;
           }
         }
       }
 
-      // --- Breakpoint: $mobile-large (e.g., up to 480px) ---
+      // --- Breakpoint: $mobile-large ---
       @media (max-width: $mobile-large) {
-        padding: $xxs; // Further reduced overall mobile content padding
+        padding: $xxs; 
         .nav__section {
           &--logo {
-            padding-right: $xxs; // Further reduced padding before divider
+            padding-right: $xxs;
             img {
-              height: 3.5rem; // Smaller logo
+              height: 3.5rem; 
             }
           }
 
           &--buttons {
-            padding-left: $xxs; // Further reduced padding from divider
-            padding-right: $xxs; // Further reduced padding from close button
+            padding-left: $xxs; 
+            padding-right: $xxs; 
             .main-nav__links {
-              gap: 0.2rem; // Very small gap
+              gap: 0.2rem; 
             }
             .btn {
-              font-size: 0.9rem; // **FURTHER REDUCED Even smaller font**
-              padding: 0.4rem 0.6rem; // **FURTHER REDUCED Even tighter button padding**
+              font-size: 0.9rem; 
+              padding: 0.4rem 0.6rem; 
             }
           }
         }
 
         .main-nav__close {
           svg {
-            width: 2rem; // Smaller close button
+            width: 2rem; 
             height: 2rem;
           }
         }
       }
 
-      // --- Breakpoint: $mobile-medium (e.g., up to 375px) ---
+     
       @media (max-width: $mobile-medium) {
-        padding: 0.1rem; // Minimal overall mobile content padding
+        padding: 0.1rem;
 
         .nav__section {
           &--logo {
-            padding-right: 0.2rem; // Extremely tight padding before divider
+            padding-right: 0.2rem; 
             img {
-              height: 3rem; // Even smaller logo
+              height: 3rem; 
             }
           }
 
           &--buttons {
-            padding-left: 0.2rem; // Extremely tight padding from divider
-            padding-right: 0.2rem; // Extremely tight padding from close button
+            padding-left: 0.2rem; 
+            padding-right: 0.2rem; 
             .main-nav__links {
-              gap: 0.1rem; // Super tiny gap
+              gap: 0.1rem; 
             }
             .btn {
-              font-size: 0.8rem; // **FURTHER REDUCED Smallest practical font size**
-              padding: 0.3rem 0.5rem; // **FURTHER REDUCED Minimal button padding**
+              font-size: 0.8rem; 
+              padding: 0.3rem 0.5rem; 
             }
           }
         }
 
         .main-nav__close {
           svg {
-            width: 1.8rem; // Smallest close button
+            width: 1.8rem; 
             height: 1.8rem;
           }
         }
       }
 
-      // --- Breakpoint: $mobile-small (e.g., up to 320px) ---
+     
       @media (max-width: $mobile-small) {
-        padding: 0; // No padding for mobile content at this size
+        padding: 0; 
 
         .nav__section {
           &--logo {
             padding-right: 0.1rem;
             img {
-              height: 2.8rem; // Absolutely tiny logo
+              height: 2.8rem; 
             }
           }
 
@@ -237,17 +219,17 @@
             padding-left: 0.1rem;
             padding-right: 0.1rem;
             .main-nav__links {
-              gap: 0.1rem; // Keep gap minimal
+              gap: 0.1rem; 
             }
             .btn {
-              font-size: 0.7rem; // **FURTHER REDUCED Potentially hard to read, but as small as possible**
-              padding: 0.2rem 0.4rem; // **FURTHER REDUCED Absolute minimal button padding**
+              font-size: 0.7rem; 
+              padding: 0.2rem 0.4rem; 
             }
           }
         }
         .main-nav__close {
           svg {
-            width: 1.6rem; // Even tinier close button
+            width: 1.6rem; 
             height: 1.6rem;
           }
         }
@@ -256,7 +238,7 @@
   }
 
 
-  // --- When the main-nav is OPEN ---
+ 
   &.is-open {
     transform: translateY(0);
     opacity: 1;
@@ -273,7 +255,7 @@
     }
   }
 
-  // --- Hamburger Icon for Mobile ---
+ 
   &__toggle {
     position: fixed;
     top: $md-spacing;
@@ -299,40 +281,48 @@
     }
   }
 
-  // --- Desktop Navigation Specifics (Vertical, Right-aligned) ---
+  
   @include media-breakpoint-up($md) {
+    
+    display: flex !important;
+    opacity: 1 !important;
+    transform: none !important;
+
     position: fixed;
-    top: 50%;
-    right: $md-spacing;
+    top: 0;
+    right: 0;
     left: auto;
-    width: auto;
-    height: auto;
-    transform: translateY(-50%);
-    background-color: transparent;
+    
+    width: 20rem;
+    height: 100vh;
+
+    background-color: $light;
     border: 3px solid $dark;
     flex-direction: column;
     justify-content: flex-start;
     padding: 0;
-    opacity: 1;
-    display: flex;
 
     &.is-open {
-      height: auto;
-      background-color: transparent;
-      transform: translateY(-50%);
+      display: flex !important;
+      opacity: 1 !important;
+      transform: none !important;
+      height: 100vh;
+      background-color: $light;
     }
 
     .nav-mobile-content {
       display: none !important;
     }
+
     .nav-desktop-content {
       display: flex;
       flex-direction: column;
       height: 100%;
+      width: 100%; 
     }
 
     .nav__section {
-      width: 100%;
+      width: 100%; 
       border-bottom: 3px solid $dark;
       &:last-child {
         border-bottom: none;
@@ -357,9 +347,9 @@
       &--buttons {
         min-height: $xxxl-spacing * 2;
         flex-direction: column;
-        gap: $sm-spacing;
         position: relative;
         overflow: hidden;
+        flex-grow: 1;
 
         &::before {
           content: '';
@@ -369,29 +359,41 @@
           width: 100%;
           height: 100%;
           background-image:
-            linear-gradient(to right, rgba($text-light, 0.1) 0.2px, transparent 0.2px),
-            linear-gradient(to bottom, rgba($text-light, 0.1) 0.2px, transparent 0.2px);
+            linear-gradient(to right, rgba($text-dark, 0.1) 0.2px, transparent 0.2px),
+            linear-gradient(to bottom, rgba($text-dark, 0.1) 0.2px, transparent 0.2px);
           background-size: $xs $xs;
           z-index: -1;
         }
 
         .main-nav__links {
+          display: flex;
           flex-direction: column;
+          justify-content: space-around;
           list-style: none;
           padding: 0;
           margin: 0;
           gap: $sm-spacing;
+          height: 100%;
+
+     
+          li, a {
+            width: auto !important; 
+          }
         }
 
         .btn {
-          font-size: $text;
+          font-size: $text-large;
           padding: $xs $sm-spacing;
-          background-color: $default-button;
-          color: $text-light;
-          border: none;
+          white-space: nowrap;
+          background-color: transparent;
+          color: $text-dark;
+          border: 1px solid $text-dark;
+          display: block;      
+          width: 15rem !important; 
+          margin: 0 auto;      
 
           &::before {
-            background-color: $purple;
+            background-color: lighten($purple, 20%);
           }
 
           &:hover {
@@ -402,6 +404,7 @@
 
       &--empty {
         min-height: $lg-spacing;
+        flex-grow: 1;
       }
 
       &--second-logo {
@@ -417,7 +420,7 @@
         flex-direction: column;
         .page-text {
           font-size: $text-small;
-          color: $text-light;
+          color: $text-dark;
           margin-bottom: $xxs;
         }
         .page-num {

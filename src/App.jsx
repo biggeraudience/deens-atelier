@@ -3,19 +3,19 @@ import HeroSection from './components/sections/HeroSection';
 import ProjectShowcase from './components/sections/ProjectShowcase';
 import AboutSection from './components/sections/AboutSection';
 import CustomCursor from './components/global/CustomCursor';
-import Loader from './components/global/Loader'; // You'll manage loader state in App or context
-import ProgressBar from './components/global/ProgressBar'; // Or manage via context/effect
-import Nav from './components/global/Nav'; // Import the Nav component
+import Loader from './components/global/Loader';  
+import ProgressBar from './components/global/ProgressBar'; 
+import Nav from './components/global/Nav'; 
 
 function App() {
-  // Example: simple state for loader (you'll refine this)
+  
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    // Simulate loading
+    
     setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // Hide loader after 2 seconds (adjust as needed)
+    }, 2000); 
   }, []);
 
   if (isLoading) {
@@ -24,16 +24,16 @@ function App() {
 
   return (
     <>
-      {/* Global components that should always be present */}
+      
       <CustomCursor />
       <ProgressBar />
-      <Nav /> {/* The navigation component, applied globally */}
+      <Nav /> 
 
-      {/* Main content sections */}
+      
       <HeroSection />
       <ProjectShowcase />
       <AboutSection />
-      {/* Other sections will go here */}
+     
     </>
   );
 }

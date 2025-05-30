@@ -1,6 +1,6 @@
 import React from 'react';
-import ProjectCard from '../projects/ProjectCard'; // This will be your animated project component
-import { projectsData } from '../../data/projects'; // Import project data
+import ProjectCard from '../projects/ProjectCard'; 
+import { projectsData } from '../../data/projects'; 
 
 const ProjectShowcase = () => {
   return (

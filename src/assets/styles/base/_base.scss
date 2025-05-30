@@ -1,54 +1,54 @@
 // src/assets/styles/base/_base.scss
 
 html {
-  font-size: $size-root-mobile; // Base 1rem = 10px on mobile
+  font-size: $size-root-mobile; 
 
-  @include media-breakpoint-up($lg) { // Corrected: Using $lg
-    font-size: 68.75%; // 1rem = 11px on larger screens (adjust as needed for desired base size)
+  @include media-breakpoint-up($lg) { 
+    font-size: 68.75%; 
   }
 }
 
 body {
-  font-family: $family-body; // Corrected: Using $
-  font-size: $text; // Corrected: Using $
-  line-height: $height-body; // Corrected: Using $
-  color: $text-light; // Default text color, adjust per section background
-  background-color: $dark; // Default background color
-  overflow-x: hidden; // Prevent horizontal scrollbar issues
+  font-family: $family-body; 
+  font-size: $text; 
+  line-height: $height-body; 
+  color: $text-light; 
+  background-color: $dark; 
+  overflow-x: hidden; 
 }
 
 h1 {
-  font-family: $family-heading; // Corrected: Using $
-  font-size: $h1; // Corrected: Using the clamp() variable
-  line-height: $height-heading; // Corrected: Using $
-  font-weight: $weight-bold; // Corrected: Using $
-  color: $text-light; // Corrected: Using $
+  font-family: $family-heading; 
+  font-size: $h1; 
+  line-height: $height-heading; 
+  font-weight: $weight-bold; 
+  color: $text-light; 
 }
 
 h2 {
-  font-family: $family-heading; // Corrected: Using $
-  font-size: $h2; // Corrected: Using the clamp() variable
-  line-height: $height-heading; // Corrected: Using $
-  font-weight: $weight-bold; // Corrected: Using $
-  color: $text-light; // Corrected: Using $
+  font-family: $family-heading; 
+  font-size: $h2; 
+  line-height: $height-heading; 
+  font-weight: $weight-bold; 
+  color: $text-light; 
 }
 
 h3 {
-  font-family: $family-heading; // Corrected: Using $
-  font-size: $h3; // Corrected: Using the clamp() variable
-  line-height: $height-heading; // Corrected: Using $
-  font-weight: $weight-bold; // Corrected: Using $
-  color: $text-light; // Corrected: Using $
+  font-family: $family-heading; 
+  font-size: $h3; 
+  line-height: $height-heading; 
+  font-weight: $weight-bold; 
+  color: $text-light; 
 }
 
 .subheading {
-  font-family: $family-subheading; // Corrected: Using $
-  font-size: $text-large; // Corrected: Using a defined text size variable
-  font-weight: $weight-regular; // Corrected: Using $
-  color: $text-light; // Corrected: Using $
+  font-family: $family-subheading; 
+  font-size: $text-large; 
+  font-weight: $weight-regular; 
+  color: $text-light; 
 }
 
-/* Minimal Reset/Normalize (kept as is, ensure variables are correctly referenced if any are added later) */
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
