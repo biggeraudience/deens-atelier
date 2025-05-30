@@ -1,0 +1,10 @@
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%; // Controlled by JS
+  height: 0.5rem; // Height of the bar
+  background-color: -purple;
+  z-index: -index-sticky-elements;
+  transition: background-color -speed-fast ease-in-out;
+}

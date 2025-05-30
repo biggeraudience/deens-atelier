@@ -1,0 +1,48 @@
+// src/assets/styles/components/_button.scss
+
+.btn {
+  font-family: $family-heading; // Corrected: Using $
+  font-size: $text;             // Corrected: Using $
+  padding: $sm-spacing $md-spacing; // Corrected: Using $ and the clearer spacing variables
+  border: none;
+  cursor: pointer;
+  transition: background-color $speed-fast $in-out, color $speed-fast $in-out; // Corrected: Using $
+  position: relative; // Needed for pseudo-element animation
+  overflow: hidden; // Hides the pseudo-element before it fully expands
+  z-index: $index-base; // Ensures button content is above the pseudo-element
+
+  &--default {
+    background-color: $default-button; // Black background
+    color: $text-light;                // White text
+
+    // Pseudo-element for the right-to-left color animation
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: $purple; // The color it transitions to
+      transform: scaleX(0); // Starts hidden (0 width)
+      transform-origin: right; // Animates from right to left
+      transition: transform $speed-fast $in-out;
+      z-index: -1; // Places the pseudo-element behind the button's text
+    }
+
+    &:hover {
+      color: $text-light; // Ensures text remains white on hover
+      &::before {
+        transform: scaleX(1); // Expands the pseudo-element to fill the button
+      }
+    }
+  }
+
+  &--primary {
+    background-color: $active-button; // Purple background
+    color: $text-light;               // White text
+    &:hover {
+      background-color: $hover-button; // Lighter purple on hover
+    }
+  }
+}

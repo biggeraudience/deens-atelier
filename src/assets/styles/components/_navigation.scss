@@ -1,0 +1,432 @@
+// src/assets/styles/layout/_navigation.scss
+
+.main-nav {
+  // Base styles for the main nav container (mobile-first initial hidden state)
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; // Full screen for mobile overlay potential
+  background-color: $dark; // Default dark background for mobile overlay
+  z-index: $index-fixed-nav;
+  transition: background-color $speed-normal $out-expo; // Only background color transition here
+
+  // Initial hidden state for mobile (GSAP will manage `display: none` and `y: 100%`)
+  transform: translateY(100%);
+  opacity: 0;
+  display: none; // This will be overridden by GSAP when opening
+
+  // Hide desktop-specific content by default (mobile-first approach)
+  .nav-desktop-content {
+    display: none;
+  }
+
+  // --- Mobile Navigation Content (Horizontal Layout, always nested correctly) ---
+  // This block applies to screens smaller than $md (typically desktop breakpoint)
+  // and will be progressively overridden by `max-width` media queries below.
+  @media (max-width: ($md - 1px)) {
+    .nav-mobile-content {
+      display: none; // Hidden by default, shown when .is-open
+      width: 100%;
+      height: 100%; // Takes full height of the horizontal bar (10rem when open)
+      padding: $xs; // Default padding for mobile content
+      flex-direction: row; // Logo, buttons, close all in a row
+      justify-content: space-between; // Distribute items horizontally
+      align-items: center; // Vertically align items in the row
+
+      // --- Default mobile styles (apply to most mobile screens) ---
+      .nav__section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+
+        &--logo {
+          flex: 0 0 auto;
+          padding-right: $xs; // Space before the divider
+          position: relative;
+
+          img {
+            height: 4rem; // Default logo height for larger mobile screens
+            width: auto;
+          }
+
+          &::after { // Separator line
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 80%;
+            background-color: $text-dark;
+          }
+        }
+
+        &--buttons {
+          flex-grow: 1; // Takes up remaining space for buttons
+          display: flex;
+          flex-direction: row; // Buttons themselves are laid out horizontally
+          justify-content: space-around; // Distribute buttons evenly
+          align-items: center; // Vertically center buttons
+          gap: $xxs; // Default gap between buttons
+          position: relative; // For the grid background
+          overflow: hidden; // Hide grid overflow
+
+          padding-left: $xs; // Padding from divider
+          padding-right: $xs; // Padding from close button
+
+          &::before { // Grid background
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+              linear-gradient(to right, rgba($text-dark, 0.1) 0.2px, transparent 0.2px),
+              linear-gradient(to bottom, rgba($text-dark, 0.1) 0.2px, transparent 0.2px);
+            background-size: $xs $xs;
+            z-index: -1;
+          }
+
+          .main-nav__links { // Styling for the ul
+            display: flex;
+            flex-direction: row;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: $xxs; // Space between list items within the ul
+          }
+
+          .btn {
+            font-size: 1rem; // **FURTHER REDUCED Default button font size for mobile**
+            padding: 0.5rem 0.8rem; // **FURTHER REDUCED Default button padding for mobile**
+            white-space: nowrap; // Prevent text wrapping
+            background-color: transparent;
+            color: $text-dark;
+            border: 1px solid $text-dark;
+
+            &::before {
+              background-color: lighten($purple, 20%);
+            }
+
+            &:hover {
+              color: $text-light;
+            }
+          }
+        }
+      }
+
+      // Close Button for Mobile Nav
+      .main-nav__close {
+        position: static;
+        background: none;
+        border: none;
+        cursor: pointer;
+        svg {
+          width: 2.2rem; // Default close icon size
+          height: 2.2rem;
+          path {
+            stroke: $text-dark;
+          }
+        }
+      }
+
+      // --- Breakpoint: Medium Mobiles/Tablets (481px to 767px) ---
+      @media (min-width: (#{$mobile-large + 1})) and (max-width: ($md - 1px)) {
+        .nav__section {
+          &--logo {
+            img {
+              height: 5.5rem; // Bigger logo for medium screens
+            }
+          }
+          &--buttons {
+            .btn {
+              font-size: 1.4rem;      // Larger button text for medium screens
+              padding: 1rem 1.4rem;   // More generous padding for medium screens
+            }
+          }
+        }
+        .main-nav__close {
+          svg {
+            width: 2.8rem;  // Bigger close icon for medium screens
+            height: 2.8rem;
+          }
+        }
+      }
+
+      // --- Breakpoint: $mobile-large (e.g., up to 480px) ---
+      @media (max-width: $mobile-large) {
+        padding: $xxs; // Further reduced overall mobile content padding
+        .nav__section {
+          &--logo {
+            padding-right: $xxs; // Further reduced padding before divider
+            img {
+              height: 3.5rem; // Smaller logo
+            }
+          }
+
+          &--buttons {
+            padding-left: $xxs; // Further reduced padding from divider
+            padding-right: $xxs; // Further reduced padding from close button
+            .main-nav__links {
+              gap: 0.2rem; // Very small gap
+            }
+            .btn {
+              font-size: 0.9rem; // **FURTHER REDUCED Even smaller font**
+              padding: 0.4rem 0.6rem; // **FURTHER REDUCED Even tighter button padding**
+            }
+          }
+        }
+
+        .main-nav__close {
+          svg {
+            width: 2rem; // Smaller close button
+            height: 2rem;
+          }
+        }
+      }
+
+      // --- Breakpoint: $mobile-medium (e.g., up to 375px) ---
+      @media (max-width: $mobile-medium) {
+        padding: 0.1rem; // Minimal overall mobile content padding
+
+        .nav__section {
+          &--logo {
+            padding-right: 0.2rem; // Extremely tight padding before divider
+            img {
+              height: 3rem; // Even smaller logo
+            }
+          }
+
+          &--buttons {
+            padding-left: 0.2rem; // Extremely tight padding from divider
+            padding-right: 0.2rem; // Extremely tight padding from close button
+            .main-nav__links {
+              gap: 0.1rem; // Super tiny gap
+            }
+            .btn {
+              font-size: 0.8rem; // **FURTHER REDUCED Smallest practical font size**
+              padding: 0.3rem 0.5rem; // **FURTHER REDUCED Minimal button padding**
+            }
+          }
+        }
+
+        .main-nav__close {
+          svg {
+            width: 1.8rem; // Smallest close button
+            height: 1.8rem;
+          }
+        }
+      }
+
+      // --- Breakpoint: $mobile-small (e.g., up to 320px) ---
+      @media (max-width: $mobile-small) {
+        padding: 0; // No padding for mobile content at this size
+
+        .nav__section {
+          &--logo {
+            padding-right: 0.1rem;
+            img {
+              height: 2.8rem; // Absolutely tiny logo
+            }
+          }
+
+          &--buttons {
+            padding-left: 0.1rem;
+            padding-right: 0.1rem;
+            .main-nav__links {
+              gap: 0.1rem; // Keep gap minimal
+            }
+            .btn {
+              font-size: 0.7rem; // **FURTHER REDUCED Potentially hard to read, but as small as possible**
+              padding: 0.2rem 0.4rem; // **FURTHER REDUCED Absolute minimal button padding**
+            }
+          }
+        }
+        .main-nav__close {
+          svg {
+            width: 1.6rem; // Even tinier close button
+            height: 1.6rem;
+          }
+        }
+      }
+    }
+  }
+
+
+  // --- When the main-nav is OPEN ---
+  &.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    height: 10rem;
+    background-color: $light;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: ($md - 1px)) {
+      .nav-mobile-content {
+        display: flex;
+      }
+    }
+  }
+
+  // --- Hamburger Icon for Mobile ---
+  &__toggle {
+    position: fixed;
+    top: $md-spacing;
+    right: $md-spacing;
+    z-index: $index-fixed-nav + 1;
+    background: none;
+    border: none;
+    cursor: pointer;
+    svg {
+      width: $md-spacing;
+      height: $md-spacing;
+      fill: $text-light;
+    }
+
+    @include media-breakpoint-up($md) {
+      display: none;
+    }
+
+    .main-nav.is-open & {
+      svg {
+        fill: $text-dark;
+      }
+    }
+  }
+
+  // --- Desktop Navigation Specifics (Vertical, Right-aligned) ---
+  @include media-breakpoint-up($md) {
+    position: fixed;
+    top: 50%;
+    right: $md-spacing;
+    left: auto;
+    width: auto;
+    height: auto;
+    transform: translateY(-50%);
+    background-color: transparent;
+    border: 3px solid $dark;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;
+    opacity: 1;
+    display: flex;
+
+    &.is-open {
+      height: auto;
+      background-color: transparent;
+      transform: translateY(-50%);
+    }
+
+    .nav-mobile-content {
+      display: none !important;
+    }
+    .nav-desktop-content {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .nav__section {
+      width: 100%;
+      border-bottom: 3px solid $dark;
+      &:last-child {
+        border-bottom: none;
+      }
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $sm-spacing;
+
+      &--logo {
+        min-height: $xxl-spacing;
+        padding-right: 0;
+        &::after {
+          display: none;
+        }
+        img {
+          height: $xxxl-spacing;
+          width: auto;
+        }
+      }
+
+      &--buttons {
+        min-height: $xxxl-spacing * 2;
+        flex-direction: column;
+        gap: $sm-spacing;
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image:
+            linear-gradient(to right, rgba($text-light, 0.1) 0.2px, transparent 0.2px),
+            linear-gradient(to bottom, rgba($text-light, 0.1) 0.2px, transparent 0.2px);
+          background-size: $xs $xs;
+          z-index: -1;
+        }
+
+        .main-nav__links {
+          flex-direction: column;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          gap: $sm-spacing;
+        }
+
+        .btn {
+          font-size: $text;
+          padding: $xs $sm-spacing;
+          background-color: $default-button;
+          color: $text-light;
+          border: none;
+
+          &::before {
+            background-color: $purple;
+          }
+
+          &:hover {
+            color: $text-light;
+          }
+        }
+      }
+
+      &--empty {
+        min-height: $lg-spacing;
+      }
+
+      &--second-logo {
+        min-height: $xxl-spacing;
+        img {
+          height: $xxxl-spacing;
+          width: auto;
+        }
+      }
+
+      &--page-number {
+        min-height: $lg-spacing;
+        flex-direction: column;
+        .page-text {
+          font-size: $text-small;
+          color: $text-light;
+          margin-bottom: $xxs;
+        }
+        .page-num {
+          font-family: $family-heading;
+          font-size: $h2;
+          font-weight: $weight-bold;
+          color: $purple;
+        }
+      }
+    }
+  }
+}

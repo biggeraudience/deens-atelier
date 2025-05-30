@@ -1,0 +1,11 @@
+@mixin media-breakpoint-up($breakpoint) { 
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

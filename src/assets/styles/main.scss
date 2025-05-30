@@ -1,0 +1,49 @@
+@import 'variables';
+@import 'mixins';
+@import 'functions';
+
+@import 'base/reset';
+@import 'base/base';
+
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/sections';
+
+@import 'components/button';
+@import 'components/navigation';
+@import 'components/project-block';
+@import 'components/custom-cursor';
+@import 'components/image-modal';
+@import 'components/scroll-progress';
+@import 'components/loader';
+@import 'components/tooltip';
+
+@import 'utilities/helpers';
+@import 'utilities/animations'; // If you have CSS animations
+
+@import 'variables';
+@import 'mixins';
+@import 'functions';
+
+@import 'base/reset';
+@import 'base/base';
+
+@import 'layout/header';
+@import 'layout/footer';
+@import 'layout/grid';
+@import 'layout/sections';
+
+@import 'components/button';
+@import 'components/navigation';
+@import 'components/project-block';
+@import 'components/custom-cursor';
+@import 'components/image-modal';
+@import 'components/scroll-progress';
+@import 'components/loader';
+@import 'components/tooltip';
+@import 'components/navigation';
+
+
+@import 'utilities/helpers';
+@import 'utilities/animations'; // If you have CSS animations

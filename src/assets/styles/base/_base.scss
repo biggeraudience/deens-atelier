@@ -1,0 +1,84 @@
+// src/assets/styles/base/_base.scss
+
+html {
+  font-size: $size-root-mobile; // Base 1rem = 10px on mobile
+
+  @include media-breakpoint-up($lg) { // Corrected: Using $lg
+    font-size: 68.75%; // 1rem = 11px on larger screens (adjust as needed for desired base size)
+  }
+}
+
+body {
+  font-family: $family-body; // Corrected: Using $
+  font-size: $text; // Corrected: Using $
+  line-height: $height-body; // Corrected: Using $
+  color: $text-light; // Default text color, adjust per section background
+  background-color: $dark; // Default background color
+  overflow-x: hidden; // Prevent horizontal scrollbar issues
+}
+
+h1 {
+  font-family: $family-heading; // Corrected: Using $
+  font-size: $h1; // Corrected: Using the clamp() variable
+  line-height: $height-heading; // Corrected: Using $
+  font-weight: $weight-bold; // Corrected: Using $
+  color: $text-light; // Corrected: Using $
+}
+
+h2 {
+  font-family: $family-heading; // Corrected: Using $
+  font-size: $h2; // Corrected: Using the clamp() variable
+  line-height: $height-heading; // Corrected: Using $
+  font-weight: $weight-bold; // Corrected: Using $
+  color: $text-light; // Corrected: Using $
+}
+
+h3 {
+  font-family: $family-heading; // Corrected: Using $
+  font-size: $h3; // Corrected: Using the clamp() variable
+  line-height: $height-heading; // Corrected: Using $
+  font-weight: $weight-bold; // Corrected: Using $
+  color: $text-light; // Corrected: Using $
+}
+
+.subheading {
+  font-family: $family-subheading; // Corrected: Using $
+  font-size: $text-large; // Corrected: Using a defined text size variable
+  font-weight: $weight-regular; // Corrected: Using $
+  color: $text-light; // Corrected: Using $
+}
+
+/* Minimal Reset/Normalize (kept as is, ensure variables are correctly referenced if any are added later) */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

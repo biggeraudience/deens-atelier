@@ -1,0 +1,113 @@
+// --- Typography ---
+$family-heading: 'Archivo', sans-serif;
+$family-subheading: 'Archivo Narrow', sans-serif;
+$family-body: 'Architects Daughter', cursive;
+
+// --- Font Weights ---
+$weight-regular: 400;
+$weight-bold: 700;
+
+// --- Base Font Size (Mobile First) ---
+$size-root-mobile: 62.5%; // 1rem = 10px
+
+// --- Responsive Breakpoints (Mobile First - min-width) ---
+$sm: 576px; // Standard small breakpoint (e.g., larger phones in portrait, small tablets)
+$md: 768px; // Standard medium breakpoint (e.g., tablets in portrait)
+$lg: 992px; // Standard large breakpoint (e.g., tablets in landscape, small desktops)
+$xl: 1200px;
+$xxl: 1400px;
+
+// --- Custom Mobile Breakpoints (max-width for overrides on smaller screens) ---
+// These are for progressively smaller mobile screens.
+$mobile-large: 480px; // Up to 480px (common for older/smaller smartphones)
+$mobile-medium: 375px; // Up to 375px (e.g., iPhone SE, older Androids)
+$mobile-small: 320px; // Up to 320px (smallest practical smartphone width)
+
+
+// --- Responsive Font Scales (using rem and clamp()) ---
+$h1-mobile: 4.2rem; // Renamed to clarify what these are for
+$h1-desktop: 7rem;
+$h1: clamp($h1-mobile, 8vw, $h1-desktop); // Used the new variable names
+
+$h2-mobile: 3.2rem;
+$h2-desktop: 5.5rem;
+$h2: clamp($h2-mobile, 6vw, $h2-desktop);
+
+$h3-mobile: 2.4rem;
+$h3-desktop: 3.8rem;
+$h3: clamp($h3-mobile, 4vw, $h3-desktop);
+
+$h4-mobile: 1.8rem;
+$h4-desktop: 2.4rem;
+$h4: clamp($h4-mobile, 3vw, $h4-desktop);
+
+$text-large-mobile: 1.6rem; // Renamed for clarity
+$text-large-desktop: 1.8rem;
+$text-large: clamp($text-large-mobile, 2vw, $text-large-desktop);
+
+$text-small-mobile: 1.4rem; // Renamed for clarity
+$text-small-desktop: 1.6rem;
+$text-small: clamp($text-small-mobile, 2vw, $text-small-desktop);
+
+
+// Line Heights for readability
+$height-heading: 1.2;
+$height-body: 1.6;
+
+
+// --- Brand Colors ---
+$purple: #A33693;
+$grey: #605F64;
+
+// --- Functional Colors ---
+$text-light: #FFFFFF;
+$text-dark: #000000;
+
+$active-button: $purple; // Use $ for referencing other variables
+$hover-button: lighten($purple, 10%);
+$footer-tooltip: $grey;
+$default-button: #000000;
+
+// --- Backgrounds ---
+$dark: #000000;
+$light: #F8F8F8;
+
+// --- Spacing System ---
+$xxs: 0.4rem;
+$xs: 0.8rem;
+$sm-spacing: 1.6rem; // Renamed to avoid conflict with breakpoint $sm
+$md-spacing: 2.4rem; // Renamed
+$lg-spacing: 4.0rem; // Renamed
+$xl-spacing: 6.4rem; // Renamed
+$xxl-spacing: 9.6rem; // Renamed
+$xxxl-spacing: 12.8rem; // Renamed
+
+// --- Z-Index Layers ---
+$index-base: 1;
+$index-content: 10;
+$index-parallax-background: 20;
+$index-parallax-foreground: 30;
+$index-sticky-elements: 50;
+$index-fixed-nav: 100;
+$index-overlay: 200;
+$index-modal: 300;
+$index-tooltip: 400;
+$index-loader: 500;
+
+// --- Animation & Transition ---
+$speed-fast: 0.2s;
+$speed-normal: 0.4s;
+$speed-slow: 0.8s;
+
+$in-out: cubic-bezier(0.42, 0, 0.58, 1);
+$out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+
+$text-large-mobile: 1.6rem;
+$text-large-desktop: 1.8rem;
+$text-large: clamp($text-large-mobile, 2vw, $text-large-desktop);
+
+$text-small-mobile: 1.4rem;
+$text-small-desktop: 1.6rem;
+$text-small: clamp($text-small-mobile, 2vw, $text-small-desktop);
+
+$text: $text-large; 

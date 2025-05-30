@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: -sm;
+  padding-right: -sm;
+
+  @include media-breakpoint-up(-md) {
+    max-width: (-md - -md);
+    padding-left: -md;
+    padding-right: -md;
+  }
+  @include media-breakpoint-up(-lg) {
+    max-width: (-lg - -lg);
+    padding-left: -lg;
+    padding-right: -lg;
+  }
+}

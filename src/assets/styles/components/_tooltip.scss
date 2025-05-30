@@ -1,0 +1,20 @@
+.custom-tooltip {
+  position: absolute;
+  background-color: rgba($grey, 0.9);
+  color: -text-light;
+  padding: -xxs -xs;
+  border-radius: -radius-sm;
+  font-size: -size-caption; // Define -size-caption in variables
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -100%); // Position above element
+  transition: opacity -speed-fast ease-in-out, visibility -speed-fast;
+  z-index: -index-tooltip;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+}
