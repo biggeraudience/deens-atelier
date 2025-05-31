@@ -5,70 +5,29 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import PropTypes from 'prop-types';
 import '../../assets/styles/components/_project-section.scss';
-import { projectsData } from '../../data/projects';
+import { projectsData } from '../../data/projects'; // projectsData is still needed for tech specs logic, but not for next project preview
 
 gsap.registerPlugin(ScrollTrigger);
 
 const ProjectSection = ({ project, projectNumber }) => {
   const sectionRef = useRef(null);
-  const titleRef = useRef(null); // Keep if used for current project title
-  const horizontalLineRef = useRef(null); // Keep if used for current project
-  const verticalLineRef = useRef(null); // Keep if used for current project
-  const numberingRef = useRef(null); // Keep if used for current project
-  const captionRef = useRef(null); // Keep if used for current project
-  const introBodyRef = useRef(null); // Keep if used for current project
-  const introImageGridRef = useRef(null); // Keep if used for current project
-  const imageGridRefs = useRef([]);
-  const projectDetailsRef = useRef([]);
-  const techSpecsRef = useRef([]);
+  const titleRef = useRef(null);
+  const horizontalLineRef = useRef(null);
+  const verticalLineRef = useRef(null);
+  const numberingRef = useRef(null);
+  const captionRef = useRef(null);
+  const introBodyRef = useRef(null);
+  const introImageGridRef = useRef(null);
+  const imageGridRefs = useRef([]);     // IMAGES
+  const projectDetailsRef = useRef([]); // DETAILS TEXT
+  const techSpecsRef = useRef([]);      // TECH SPECS TEXT
   const processRef = useRef(null);
   const summaryRef = useRef(null);
   const bigImageContainerRef = useRef(null);
-  const nextProjectOverlayRef = useRef(null);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+  // All overlay-related refs and useEffect logic have been removed.
 
-    // Reset refs (though the specific ones for content are now within JSX)
-    imageGridRefs.current = [];
-    projectDetailsRef.current = [];
-    techSpecsRef.current = [];
-
-    // Hide the overlay by default (position it below)
-    gsap.set(nextProjectOverlayRef.current, { autoAlpha: 0, y: '100%' });
-
-    // Create a ScrollTrigger timeline that brings the overlay up only when
-    // the bottom of this section scrolls into view (animate y: 100% → y: 0).
-    const overlayTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: section,
-        start: 'bottom bottom', // when this section’s bottom hits viewport bottom
-        end: 'bottom top',      // to when this section’s bottom hits viewport top
-        scrub: 1,
-        // markers: true, // (uncomment if you want to debug)
-      },
-    });
-
-    // Animate the overlay into view
-    if (nextProjectOverlayRef.current) {
-      overlayTl.to(nextProjectOverlayRef.current, {
-        autoAlpha: 1,
-        y: 0,
-        ease: 'power2.out',
-        duration: 1,
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach((st) => {
-        if (st.trigger === section) st.kill();
-      });
-      overlayTl.kill();
-    };
-  }, [project, projectNumber, projectsData.length]); // Added projectsData.length as a dependency for the overlay logic
-
-  // Helper to get images (unchanged)
+  // Helper to pick each project’s 12 images (unchanged)
   const getImageUrl = (idx) => {
     const imageUrls = [
       project.imageUrl1, project.imageUrl2, project.imageUrl3, project.imageUrl4,
@@ -78,7 +37,7 @@ const ProjectSection = ({ project, projectNumber }) => {
     return imageUrls[idx] || `https://placehold.co/600x400?text=Image+${projectNumber}-${idx + 1}`;
   };
 
-  // Dynamically build tech specs
+  // Dynamically build tech specs (unchanged)
   const getTechSpecs = (curProj) => {
     if (curProj.id === 'al-sawam-mosque') {
       return [
@@ -107,29 +66,35 @@ const ProjectSection = ({ project, projectNumber }) => {
   };
   const techSpecs = getTechSpecs(project);
 
-  // Determine next project (array is 0-based, but projectNumber is 1-based)
-  const nextIndex = projectNumber;                    // For projectNumber=1, nextIndex=1 (second item in 0-based array)
-  const hasNext = nextIndex < projectsData.length;    // only true if a “next” exists
-  const nextProjectData = hasNext ? projectsData[nextIndex] : null;
-
   return (
     <section className="project-section" ref={sectionRef}>
-      {/* ===== SECTION 1: Intro Text ===== */}
+      {/* ================================================================= */}
+      {/* SECTION 1: Intro Text (static, non-animated) */}
       <div className="project-section__intro">
         <div className="project-section__header-block">
-          <div className="project-section__vertical-line" ref={verticalLineRef}></div>
-          <span className="project-section__numbering" ref={numberingRef}>
+          <div className="project-section__vertical-line"   ref={verticalLineRef}></div>
+          <span className="project-section__numbering"      ref={numberingRef}>
             {projectNumber.toString().padStart(2, '0')}
           </span>
-          <h2 className="project-section__title" ref={titleRef}>{project.title}</h2>
+          <h2 className="project-section__title"            ref={titleRef}>
+            {project.title}
+          </h2>
           <div className="project-section__horizontal-line" ref={horizontalLineRef}></div>
         </div>
-        <p className="project-section__caption" ref={captionRef}>{project.caption}</p>
-        <p className="project-section__body-intro" ref={introBodyRef}>{project.bodyIntro}</p>
+        <p className="project-section__caption" ref={captionRef}>
+          {project.caption}
+        </p>
+        <p className="project-section__body-intro" ref={introBodyRef}>
+          {project.bodyIntro}
+        </p>
       </div>
 
-      {/* ===== SECTION 1: Intro Image Grid ===== */}
-      <div className="project-section__image-grid project-section__image-grid--intro" ref={introImageGridRef}>
+      {/* ================================================================= */}
+      {/* SECTION 1: Intro Image Grid (static) */}
+      <div
+        className="project-section__image-grid project-section__image-grid--intro"
+        ref={introImageGridRef}
+      >
         {[0, 1, 2, 3].map((idx) => (
           <img
             key={idx}
@@ -141,10 +106,16 @@ const ProjectSection = ({ project, projectNumber }) => {
         ))}
       </div>
 
-      {/* ===== SECTION 2: Details & Tech Specs ===== */}
+      {/* ================================================================= */}
+      {/* SECTION 2: Details & Tech Specs (static) */}
       <div className="project-section__details">
         <div className="project-section__details-block">
-          <h3 className="project-section__details-title" ref={(el) => { if (el) projectDetailsRef.current[0] = el; }}>Project Details</h3>
+          <h3
+            className="project-section__details-title"
+            ref={(el) => { if (el) projectDetailsRef.current[0] = el; }}
+          >
+            Project Details
+          </h3>
           <p ref={(el) => { if (el) projectDetailsRef.current[1] = el; }}>Client: {project.client || 'N/A'}</p>
           <p ref={(el) => { if (el) projectDetailsRef.current[2] = el; }}>Status: {project.status || 'N/A'}</p>
           <p ref={(el) => { if (el) projectDetailsRef.current[3] = el; }}>Location: {project.location || 'N/A'}</p>
@@ -154,7 +125,11 @@ const ProjectSection = ({ project, projectNumber }) => {
           <h3>Technical Details</h3>
           <div className="project-section__tech-specs-grid">
             {techSpecs.map((spec, idx) => (
-              <div key={idx} className="tech-spec-item" ref={(el) => { if (el) techSpecsRef.current[idx] = el; }}>
+              <div
+                key={idx}
+                className="tech-spec-item"
+                ref={(el) => { if (el) techSpecsRef.current[idx] = el; }}
+              >
                 <strong>{spec.label}:</strong> {spec.value}
               </div>
             ))}
@@ -182,9 +157,12 @@ const ProjectSection = ({ project, projectNumber }) => {
         </div>
       </div>
 
-      {/* ===== SECTION 3: Summary & Big Images ===== */}
+      {/* ================================================================= */}
+      {/* SECTION 3: Summary & Big Images (static) */}
       <div className="project-section__summary">
-        <h3 className="project-section__summary-title" ref={summaryRef}>Project Summary</h3>
+        <h3 className="project-section__summary-title" ref={summaryRef}>
+          Project Summary
+        </h3>
         <p>
           {project.summaryContent ||
             'Comprehensive summary of the project, highlighting key features, architectural vision, and how it addresses client needs.'}
@@ -203,27 +181,9 @@ const ProjectSection = ({ project, projectNumber }) => {
         </div>
       </div>
 
-      {/* ===== NEXT PROJECT OVERLAY ===== */}
-      {hasNext && nextProjectData && (
-        <div
-          className="project-section__next-project-overlay"
-          ref={nextProjectOverlayRef}
-        >
-          <div className="project-section__header-block project-section__header-block--overlay">
-            <div className="project-section__vertical-line"></div>
-            <span className="project-section__numbering">
-              {(projectNumber + 1).toString().padStart(2, '0')}
-            </span>
-            <h2 className="project-section__title">
-              {nextProjectData.title}
-            </h2>
-            <div className="project-section__horizontal-line"></div>
-          </div>
-          <p className="project-section__caption">
-            {nextProjectData.caption}
-          </p>
-        </div>
-      )}
+      {/* The "Next Project" overlay block has been completely removed. */}
+
+      {/* End of <section> */}
     </section>
   );
 };
