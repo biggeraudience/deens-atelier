@@ -1,0 +1,29 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: -dark;
+  z-index: -index-loader;
+  @include flex-center; 
+
+  &__boxes {
+    display: flex;
+    .box {
+      width: -md;
+      height: -md;
+      background-color: -purple;
+      margin: 0 -xs;
+      animation: load-animation -speed-long infinite ease-in-out;
+
+      &:nth-child(2) { animation-delay: -speed-fast; }
+      &:nth-child(3) { animation-delay: -speed-normal; }
+    }
+  }
+}
+
+@keyframes load-animation {
+  0%, 100% { opacity: 0.2; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-0.5rem); }
+}

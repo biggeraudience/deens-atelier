@@ -1,29 +1,205 @@
-.loader {
+// ---------------------------------------------------
+// Ultra-Modern Loader Styles
+// ---------------------------------------------------
+
+.loader-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: -dark;
-  z-index: -index-loader;
-  @include flex-center; 
+  background-color: #ffffff; // Crisp white background
+  z-index: 9999; // High z-index to stay on top
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* Optional: give a subtle dark overlay if you want a tinted backdrop */
+  // background-color: rgba(0, 0, 0, 0.02);
+}
 
-  &__boxes {
-    display: flex;
-    .box {
-      width: -md;
-      height: -md;
-      background-color: -purple;
-      margin: 0 -xs;
-      animation: load-animation -speed-long infinite ease-in-out;
+.loader-title {
+  position: relative;
+  font-family: 'Inter', sans-serif; // Ultra-modern font choice
+  font-size: 3rem; // Big, bold title
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2.5rem;
 
-      &:nth-child(2) { animation-delay: -speed-fast; }
-      &:nth-child(3) { animation-delay: -speed-normal; }
+  // Color for "DEEN'S"
+  .color-purple {
+    color: #A33693;
+    display: inline-block;
+  }
+
+  // Color for "ATELIER LTD"
+  .color-grey {
+    color: #605F64;
+    display: inline-block;
+  }
+
+  .loader-underline {
+    position: absolute;
+    bottom: -0.3rem; // Slightly below text
+    left: 50%;
+    width: 8rem; // Underline length (tweak as needed)
+    height: 0.15rem;
+    background-color: #A33693; // Match the purple from “DEEN’S”
+    transform-origin: left center;
+    transform: scaleX(0); // Initially hidden
+  }
+}
+
+// -------------------------------
+// PROGRESS BAR WRAPPER & GLOW
+// -------------------------------
+
+.loader-bar-wrapper {
+  position: relative;
+  width: 80%;
+  max-width: 520px;
+  height: 0.75rem; // Slim, modern bar
+  background-color: rgba(0, 0, 0, 0.05); // Very light grey “track”
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: 0.375rem; // Slight rounding for a soft look
+
+  // Pulsating glow element behind the bar
+  .loader-bar-glow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 0.75rem;
+    background: radial-gradient(
+      circle at center,
+      rgba(163, 54, 147, 0.4) 20%,
+      rgba(163, 54, 147, 0) 80%
+    );
+    transform: translateY(-50%) scaleX(0);
+    transform-origin: center center;
+    pointer-events: none;
+    filter: blur(4px);
+    animation: glowPulse 1.5s infinite ease-in-out;
+  }
+
+  // PROGRESS BAR ITSELF
+  .loader-bar {
+    position: relative;
+    height: 100%;
+    width: 0%; // Controlled by JS
+    background-color: #A33693; // Solid purple fill
+    transform-origin: left center;
+    pointer-events: none;
+
+    // “Shine” reflection overlay
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent
+      );
+      transform: translateX(-120%);
+      animation: barShine 2s infinite ease-in-out;
     }
   }
 }
 
-@keyframes load-animation {
-  0%, 100% { opacity: 0.2; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(-0.5rem); }
+// -------------------------------
+// PERCENTAGE TEXT
+// -------------------------------
+
+.loader-percentage {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #605F64; // Same grey as “ATELIER LTD”
+  text-shadow: none;
+}
+
+// -------------------------------
+// KEYFRAMES: Shine & Glow Pulse
+// -------------------------------
+
+@keyframes barShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  50% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    transform: translateY(-50%) scaleX(0.7);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-50%) scaleX(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-50%) scaleX(0.7);
+    opacity: 0.4;
+  }
+}
+
+// -------------------------------
+// RESPONSIVE TWEAKS
+// -------------------------------
+
+@media (max-width: 768px) {
+  .loader-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+
+    .loader-underline {
+      width: 6rem;
+      bottom: -0.2rem;
+      height: 0.12rem;
+    }
+  }
+
+  .loader-bar-wrapper {
+    width: 90%;
+    height: 0.5rem;
+  }
+
+  .loader-percentage {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .loader-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+
+    .loader-underline {
+      width: 5rem;
+      bottom: -0.15rem;
+      height: 0.1rem;
+    }
+  }
+
+  .loader-bar-wrapper {
+    width: 95%;
+    height: 0.4rem;
+  }
+
+  .loader-percentage {
+    font-size: 1.25rem;
+  }
 }
