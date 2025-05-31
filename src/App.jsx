@@ -1,18 +1,15 @@
-import React from 'react';
-import HeroSection from './components/sections/HeroSection';
-import ProjectShowcase from './components/sections/ProjectShowcase';
-import AboutSection from './components/sections/AboutSection';
+// src/App.js
+import React, { useState, useEffect } from 'react';
 import CustomCursor from './components/global/CustomCursor';
 import Loader from './components/global/Loader';  
 import ProgressBar from './components/global/ProgressBar'; 
 import Nav from './components/global/Nav'; 
+import Home from './pages/Home'; // New Home component
 
 function App() {
-  
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
-  React.useEffect(() => {
-    
+  useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
     }, 2000); 
@@ -24,16 +21,10 @@ function App() {
 
   return (
     <>
-      
       <CustomCursor />
       <ProgressBar />
       <Nav /> 
-
-      
-      <HeroSection />
-      <ProjectShowcase />
-      <AboutSection />
-     
+      <Home /> {/* Render the Home component */}
     </>
   );
 }

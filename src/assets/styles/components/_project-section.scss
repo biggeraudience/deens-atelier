@@ -1,0 +1,354 @@
+// src/assets/styles/components/_project-section.scss
+
+@import '../variables';
+@import '../mixins'; // Assuming you have a _mixins.scss for media queries
+
+.project-section {
+  width: 100vw;
+  // height: 100vh; // REMOVED: Each section no longer takes full viewport height
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; // Align content to the top
+  align-items: center; // Center content horizontally
+  padding: $md-spacing; // Default padding for content from edges
+  position: relative; // For positioning internal elements and overlay
+  overflow: hidden; // Hide overflow during animations
+  background-color: $light; // White background
+
+  @media (max-width: ($md - 1px)) { // Apply on phone screens
+    padding: $sm-spacing; // Adjust padding for smaller screens
+  }
+
+  // Ensure content inside takes full width but respects padding
+  & > div:not(.project-section__next-project-overlay) {
+    width: 100%;
+    // Padding from edges is handled by the parent .project-section
+    // or by specific elements as needed.
+  }
+
+  // --- Intro Block (parent of header, caption, body-intro, and intro image grid) ---
+  &__intro {
+    position: relative;        // ESTABLISH STACKING CONTEXT
+    z-index: $index-content + 10; // HIGHER Z-INDEX TO FLOAT ABOVE IMAGES
+    width: 100%; // Ensure it takes full width within the section padding
+    padding: 0 $md-spacing; // Apply padding from edges here, consistent with others
+
+    @media (max-width: ($md - 1px)) {
+      padding: 0 $sm-spacing;
+    }
+  }
+
+
+  // --- Header Block (Title, Lines, Numbering) ---
+  &__header-block {
+    display: flex;
+    align-items: center; // Align items to the center of the first line for better visual alignment
+    margin-bottom: $xs; // Space below header
+    position: relative; // For positioning children
+    // Padding handled by parent __intro block
+    width: 100%; // Takes full width of its parent __intro block
+    z-index: $index-content + 5; // Ensure it's above potential overlapping elements within the intro block
+    background: $light;             // Ensure it has a background if it ever overlaps dark areas
+
+
+    &--overlay { // Styles for the overlayed next project header
+        position: absolute; // Relative to .project-section__next-project-overlay
+        top: 0;
+        left: 0;
+        right: 0;
+        padding-top: $lg-spacing; // Push content down from the very top of the overlay
+        background-color: $light; // Ensure background matches, can be translucent for effect
+        // transform: translateY(100%); // REMOVED: This is handled by GSAP now
+    }
+  }
+
+  &__vertical-line {
+    width: 2px;
+    background-color: $text-dark; // Black color
+    position: absolute;
+    left: $sm-spacing; // Start at the same padding as numbering (relative to __header-block)
+    top: 0; // Starts at the top of the .project-section__header-block
+    height: 7rem; // Extends down a bit, adjust as needed
+    transform-origin: top; // Ensure animation originates from the top
+    z-index: $index-content + 1; // Above other elements
+    @media (max-width: ($md - 1px)) {
+      left: $xxs; // Adjust for smaller padding on mobile
+      height: 6rem;
+    }
+  }
+
+  &__numbering {
+    font-family: $family-heading;
+    font-size: $h4;
+    color: $text-dark; // Black color
+    position: absolute;
+    left: $xs; // Position relative to header-block padding
+    top: 50%; // Center vertically within the header-block's height
+    transform: translateY(-50%);
+    z-index: $index-content + 2; // Above the vertical line
+    @media (max-width: ($md - 1px)) {
+      left: $xxs; // Adjust for smaller padding on mobile
+    }
+  }
+
+  &__title {
+    font-size: $h2; // Or adjust as needed for project titles
+    color: $text-dark; // Black color
+    margin-left: 3rem; // Space from numbering and vertical line
+    white-space: nowrap; // Prevent title from wrapping
+    @media (max-width: ($md - 1px)) {
+      font-size: $h3; // Smaller title on mobile
+      margin-left: 2.5rem;
+    }
+  }
+
+  &__horizontal-line {
+    height: 2px;
+    background-color: $text-dark; // Black color
+    flex-grow: 1; // Takes remaining space
+    margin-left: $sm-spacing; // Space from title
+  }
+
+  &__caption {
+    font-family: $family-subheading;
+    font-size: $text-large;
+    color: $grey; // Keep grey for caption as requested
+    margin-bottom: $md-spacing;
+    // Padding handled by parent __intro block
+    width: 100%; // Ensure it takes full width of its parent __intro block
+    background: rgba(#fff, 0.9); // ADDED: Background for readability
+    display: inline-block;        // ADDED: Shrink-wrap for background
+    padding: 0.4rem 0.6rem;      // ADDED: Padding for background
+    border-radius: 0.3rem;        // ADDED: Rounded corners
+    position: relative;          // ADDED: For its own z-index to work
+    z-index: $index-content + 11; // ADDED: Even higher z-index than images
+
+    @media (max-width: ($md - 1px)) {
+      // Padding handled by parent __intro block
+      font-size: $text-small;
+    }
+  }
+
+  &__body-intro {
+    font-size: $text-small;
+    color: $text-dark; // Black color
+    margin-bottom: $lg-spacing;
+    // Padding handled by parent __intro block
+    width: 100%; // Ensure it takes full width of its parent __intro block
+    background: rgba(#fff, 0.9); // ADDED: Background for readability
+    display: inline-block;        // ADDED: Shrink-wrap for background
+    padding: 0.4rem 0.6rem;      // ADDED: Padding for background
+    border-radius: 0.3rem;        // ADDED: Rounded corners
+    position: relative;          // ADDED: For its own z-index to work
+    z-index: $index-content + 11; // ADDED: Even higher z-index than images
+
+    @media (max-width: ($md - 1px)) {
+      // Padding handled by parent __intro block
+    }
+  }
+
+  // --- Image Grids ---
+  &__image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // 2 columns for phones by default
+    gap: $xs; // Gap between images
+    width: calc(100% - ($md-spacing * 2)); // Account for padding from project-section
+    margin-bottom: $lg-spacing; // Space below grid
+    // The position and z-index for the image grid itself should be relative to its parent
+    // The images inside will respect the z-index of the parent __intro block
+
+    @media (max-width: ($md - 1px)) {
+      width: calc(100% - ($sm-spacing * 2)); // Adjust width for mobile padding
+    }
+
+    &--intro, &--details {
+      // Specific styles for these grids if needed
+    }
+
+    .project-section__grid-image {
+        width: 100%;
+        height: 15rem; // Fixed height for grid images
+        object-fit: cover;
+        // Images will be initially hidden and translated by GSAP
+    }
+  }
+
+  // --- Project Details & Tech Specs ---
+  &__details, &__summary {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 $md-spacing; // Consistent padding from edges
+    margin-bottom: $lg-spacing; // Added space below these sections for separation
+
+    @media (max-width: ($md - 1px)) {
+      padding: 0 $sm-spacing;
+    }
+
+    // Ensure all internal elements start hidden for animation (handled by JS, but good fallback)
+    h3, p, .tech-spec-item {
+        color: $text-dark; // All text black
+    }
+  }
+
+  &__details-block {
+    margin-bottom: $md-spacing;
+    h3 {
+      font-size: $h3;
+      color: $purple; // Keep purple for section titles
+      margin-bottom: $xs;
+    }
+    p {
+      font-size: $text-small;
+      margin-bottom: $xxs;
+      color: $text-dark;
+    }
+  }
+
+  &__tech-specs {
+    margin-bottom: $lg-spacing;
+    h3 {
+      font-size: $h3;
+      color: $purple;
+      margin-bottom: $xs;
+    }
+  }
+
+  &__tech-specs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); // Default 2 columns for mobile
+    gap: $xs;
+
+    @media (min-width: ($md)) {
+      grid-template-columns: repeat(3, 1fr); // 3x3 grid for larger screens
+    }
+
+    .tech-spec-item {
+      background-color: lighten($grey, 45%); // Slightly lighter grey for background
+      padding: $xs;
+      border-radius: 4px;
+      font-size: $text-small;
+      color: $text-dark;
+      strong {
+        color: $purple; // Keep purple for labels
+      }
+    }
+  }
+
+  &__process {
+    margin-bottom: $lg-spacing;
+    h3 {
+      font-size: $h3;
+      color: $purple;
+      margin-bottom: $xs;
+    }
+    p {
+      font-size: $text-small;
+      color: $text-dark;
+    }
+  }
+
+  // --- Summary & Big Image ---
+  &__summary-title {
+    font-size: $h3;
+    color: $purple;
+    margin-bottom: $xs;
+  }
+
+  &__big-image-container {
+    display: grid;
+    grid-template-columns: 1fr; // Single column for phone for "big image"
+    gap: $xs;
+    margin-top: $md-spacing;
+    margin-bottom: $lg-spacing; // Ensure space below last image container
+
+    .project-section__big-image {
+        width: 100%;
+        height: 30rem; // Larger height for big images
+        object-fit: cover;
+    }
+  }
+
+  // --- Next Project Overlay ---
+  &__next-project-overlay {
+    position: sticky; // Changed to sticky to make it scroll with the content
+    bottom: 0; // Stick to the bottom of the viewport as its parent scrolls
+    left: 0;
+    width: 100%;
+    // height: 100%; // REMOVED: Overlay height should be dynamic based on content
+    padding-top: $lg-spacing; // Ensure space at the top of the overlay
+    padding-bottom: $lg-spacing; // Add padding at the bottom for better look
+    background-color: $light; // White background for the overlay
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; // Start content from the top
+    align-items: flex-start; // Align content to the left
+    padding-left: $md-spacing; // Consistent padding
+    padding-right: $md-spacing; // Consistent padding
+    z-index: $index-overlay; // Ensure it's above the current section
+    // Initial state is set by GSAP (y: 100%, autoAlpha: 0)
+
+    @media (max-width: ($md - 1px)) {
+      padding-left: $sm-spacing;
+      padding-right: $sm-spacing;
+    }
+
+    .project-section__header-block--overlay {
+        // Overrides for header block within overlay
+        position: relative; // Reset position for content flow within overlay
+        transform: translateY(0); // This block itself doesn't animate up, its parent does
+    }
+
+    .project-section__vertical-line {
+      left: $sm-spacing; // Ensure consistent alignment with parent section
+      @media (max-width: ($md - 1px)) {
+        left: $xxs;
+      }
+    }
+    .project-section__numbering {
+      left: $xs; // Ensure consistent alignment with parent section
+      @media (max-width: ($md - 1px)) {
+        left: $xxs;
+      }
+    }
+    .project-section__title {
+      color: $text-dark;
+    }
+    .project-section__horizontal-line {
+      background-color: $text-dark;
+    }
+    .project-section__caption {
+        color: $grey; // Keep grey for caption
+    }
+  }
+
+
+  // Desktop adjustments (optional, based on your design)
+  @include media-breakpoint-up($md) {
+    .project-section__image-grid {
+      grid-template-columns: repeat(4, 1fr); // 4 columns for desktop
+      .project-section__grid-image {
+        height: 20rem;
+      }
+    }
+
+    .project-section__big-image-container {
+      grid-template-columns: repeat(2, 1fr); // 2 large images on desktop
+      .project-section__big-image {
+        height: 40rem;
+      }
+    }
+
+    // Adjust title/numbering alignment for wider screens if needed
+    &__numbering {
+      left: $sm-spacing; // Align with main padding on desktop
+    }
+    &__vertical-line {
+      left: $sm-spacing; // Align with main padding on desktop
+    }
+    &__title {
+        margin-left: 5rem; // More space for desktop titles
+    }
+  }
+}
+

@@ -1,0 +1,10 @@
+// src/assets/styles/pages/_home.scss
+@import '../variables';
+
+.home-page {
+  background-color: $light; // White background as requested
+  color: $text-dark; // Default text color for the home page
+  min-height: 100vh; // Ensure it takes full viewport height for initial load
+  overflow: hidden; // Important to prevent scroll issues with pinned sections
+  position: relative; // Needed for proper stacking context if you add more
+}
