@@ -1,113 +1,160 @@
+// src/components/Nav.jsx
+
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import PropTypes from 'prop-types';
 
+// Import both logos once. Adjust the relative path as needed.
+import deensLogo from '../../assets/icons/deens-atelier-logo.png';
+import arconLogo from '../../assets/icons/arcon-logo.png';
+
 const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const navRef = useRef(null);
   const [currentPageNumber, setCurrentPageNumber] = useState('01');
+  const navRef = useRef(null);
 
   useEffect(() => {
-    if (navRef.current) {
-      if (isOpen) {
-        
-        gsap.set(navRef.current, { display: 'flex' }); 
-        navRef.current.classList.add('is-open'); 
-        gsap.to(navRef.current, {
-          y: '0%',
-          opacity: 1, 
-          duration: 0.5,
-          ease: 'power3.out',
-        });
-      } else {
-       
-        gsap.to(navRef.current, {
-          y: '100%', 
-          opacity: 0, 
-          duration: 0.5,
-          ease: 'power3.in',
-          onComplete: () => {
-            navRef.current.classList.remove('is-open'); 
-            gsap.set(navRef.current, { display: 'none' }); 
-          },
-        });
-      }
+    if (!navRef.current) return;
+    if (isOpen) {
+      gsap.set(navRef.current, { display: 'flex' });
+      navRef.current.classList.add('is-open');
+      gsap.to(navRef.current, {
+        y: '0%',
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power3.out',
+      });
+    } else {
+      gsap.to(navRef.current, {
+        y: '100%',
+        opacity: 0,
+        duration: 0.5,
+        ease: 'power3.in',
+        onComplete: () => {
+          navRef.current.classList.remove('is-open');
+          gsap.set(navRef.current, { display: 'none' });
+        },
+      });
     }
   }, [isOpen]);
 
   const toggleNav = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const handleLinkClick = () => {
-    setIsOpen(false); 
+    setIsOpen(false);
   };
 
   return (
     <>
-      
-      <button className="main-nav__toggle" onClick={toggleNav}>
-        {/* SVG for Hamburger */}
+      {/* Hamburger toggle */}
+      <button
+        className="main-nav__toggle"
+        onClick={toggleNav}
+        style={{ display: isOpen ? 'none' : 'block' }}
+      >
         <svg width="30" height="20" viewBox="0 0 30 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="30" height="3" fill="white"/>
-          <rect y="8" width="30" height="3" fill="white"/>
-          <rect y="16" width="30" height="3" fill="white"/>
+          <rect width="30" height="3" fill="black" />
+          <rect y="8" width="30" height="3" fill="#A33693" />
+          <rect y="16" width="30" height="3" fill="black" />
         </svg>
       </button>
 
-      {/* Unified Navigation Container */}
       <nav className="main-nav" ref={navRef}>
-
-        {/* Mobile Navigation Content (visible on mobile, hidden on desktop by CSS) */}
+        {/* ---------------------------------- */}
+        {/* -- MOBILE CONTENT -- (shown < md) */}
+        {/* ---------------------------------- */}
         <div className="nav-mobile-content">
           <div className="nav__section nav__section--logo">
-            <img src="https://placehold.co/100x50/000000/FFFFFF?text=DEENS" alt="Deen's Atelier Logo" className="main-nav__logo" />
+            {/* Use the imported deensLogo */}
+            <img src={deensLogo} alt="Deen's Atelier Logo" className="main-nav__logo" />
           </div>
 
           <div className="nav__section nav__section--buttons">
             <ul className="main-nav__links">
-              <li><a href="#home" className="btn btn--default" onClick={handleLinkClick}>HOME</a></li>
-              <li><a href="#portfolio" className="btn btn--default" onClick={handleLinkClick}>PORTFOLIO</a></li>
-              <li><a href="#services" className="btn btn--default" onClick={handleLinkClick}>SERVICES</a></li>
-              <li><a href="#journal" className="btn btn--default" onClick={handleLinkClick}>JOURNAL</a></li>
-              <li><a href="#contact" className="btn btn--default" onClick={handleLinkClick}>CONTACT</a></li>
+              <li>
+                <a href="#home" className="btn btn--default" onClick={handleLinkClick}>
+                  HOME
+                </a>
+              </li>
+              <li>
+                <a href="#portfolio" className="btn btn--default" onClick={handleLinkClick}>
+                  PORTFOLIO
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="btn btn--default" onClick={handleLinkClick}>
+                  SERVICES
+                </a>
+              </li>
+              <li>
+                <a href="#journal" className="btn btn--default" onClick={handleLinkClick}>
+                  JOURNAL
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="btn btn--default" onClick={handleLinkClick}>
+                  CONTACT
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Close Button for Mobile Nav */}
           <button className="main-nav__close" onClick={toggleNav}>
-            {/* SVG for Close */}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M18 6L6 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M18 6L6 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M6 6L18 18" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
 
-        {/* Desktop Navigation Content (visible on desktop, hidden on mobile by CSS) */}
+        {/* ---------------------------------- */}
+        {/* -- DESKTOP CONTENT -- (shown ≥ md) */}
+        {/* ---------------------------------- */}
         <div className="nav-desktop-content">
-          {/* Section 1: Company Logo */}
+          {/* Section 1: Deen's Atelier Logo */}
           <div className="nav__section nav__section--logo">
-            <img src="https://placehold.co/100x50/000000/FFFFFF?text=DEENS" alt="Deen's Atelier Logo" className="main-nav__logo" />
+            <img src={deensLogo} alt="Deen's Atelier Logo" className="main-nav__logo" />
           </div>
 
-          {/* Section 2: Navigation Buttons */}
+          {/* Section 2: Navigation Links */}
           <div className="nav__section nav__section--buttons">
             <ul className="main-nav__links">
-              <li><a href="#home" className="btn btn--default">HOME</a></li>
-              <li><a href="#portfolio" className="btn btn--default">PORTFOLIO</a></li>
-              <li><a href="#services" className="btn btn--default">SERVICES</a></li>
-              <li><a href="#journal" className="btn btn--default">JOURNAL</a></li>
-              <li><a href="#contact" className="btn btn--default">CONTACT</a></li>
+              <li>
+                <a href="#home" className="btn btn--default">
+                  HOME
+                </a>
+              </li>
+              <li>
+                <a href="#portfolio" className="btn btn--default">
+                  PORTFOLIO
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="btn btn--default">
+                  SERVICES
+                </a>
+              </li>
+              <li>
+                <a href="#journal" className="btn btn--default">
+                  JOURNAL
+                </a>
+              </li>
+              <li>
+                <a href="#contact" className="btn btn--default">
+                  CONTACT
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Section 3: Empty Section */}
+          {/* Section 3: (Empty placeholder) */}
           <div className="nav__section nav__section--empty"></div>
 
-          {/* Section 4: arcon Logo */}
+          {/* Section 4: Arcon Logo */}
           <div className="nav__section nav__section--second-logo">
-            <img src="https://placehold.co/80x40/000000/FFFFFF?text=ATELIER" alt="Atelier Icon" className="main-nav__secondary-logo" />
+            <img src={arconLogo} alt="Arcon Logo" className="main-nav__secondary-logo" />
           </div>
 
           {/* Section 5: Page Number */}
@@ -122,7 +169,7 @@ const Nav = () => {
 };
 
 Nav.propTypes = {
- 
+  // no props here for now
 };
 
 export default Nav;
